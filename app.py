@@ -25,6 +25,10 @@ def main():
     print(f"Rows read: {report['rows_read']}")
     print(f"Duplicates removed: {report['duplicates_removed']}")
     print(f"Missing values: {report['missing_values']}")
+    print(
+        f"Numeric conversion errors: "
+        f"{report['numeric_conversion_errors']}"
+    )
     print(f"Rows exported: {report['rows_exported']}")
     print(f"Saved to: {args.output_file}")
 

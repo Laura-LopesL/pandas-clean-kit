@@ -19,28 +19,35 @@ def remove_duplicates(df):
 
 def convert_numeric_columns(df, columns=NUMERIC_COLUMNS):
     cleaned = df.copy()
+    conversion_errors = 0
 
     for column in columns:
         if column in cleaned.columns:
-            cleaned[column] = pd.to_numeric(
-                cleaned[column],
-                errors="coerce",
+            original = cleaned[column]
+            converted = pd.to_numeric(original, errors="coerce")
+
+            conversion_errors += int(
+                (original.notna() & converted.isna()).sum()
             )
 
-    return cleaned
+            cleaned[column] = converted
+
+    return cleaned, conversion_errors
 
 
 def clean_dataframe(df):
     original_rows = len(df)
+    original_missing = int(df.isna().sum().sum())
 
     cleaned = normalize_columns(df)
+    cleaned, conversion_errors = convert_numeric_columns(cleaned)
     cleaned = remove_duplicates(cleaned)
-    cleaned = convert_numeric_columns(cleaned)
 
     report = {
         "rows_read": original_rows,
         "duplicates_removed": original_rows - len(cleaned),
-        "missing_values": int(cleaned.isna().sum().sum()),
+        "missing_values": original_missing,
+        "numeric_conversion_errors": conversion_errors,
         "rows_exported": len(cleaned),
     }
 
