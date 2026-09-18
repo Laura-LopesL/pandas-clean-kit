@@ -1,12 +1,59 @@
 # pandas-clean-kit
-Mini pipeline de limpeza e export para Parquet.
 
-INSTALAR:
-   pip install pandas pyarrow
+Pequeno pipeline de limpeza de dados em Python com Pandas.
 
-RODAR:
-   python app.py --in raw.csv --out cleaned.parquet
+O projeto lê um arquivo CSV, normaliza nomes de colunas, remove registros duplicados, converte colunas numéricas e exporta o resultado para Parquet.
 
-EXEMPLO raw.csv:
-   id,amount,price
-   1,10,2.5
+## Funcionalidades
+
+- Normalização de nomes de colunas
+- Remoção de duplicatas
+- Conversão de colunas numéricas
+- Identificação de valores ausentes
+- Relatório simples de qualidade dos dados
+- Exportação para Parquet
+- Testes automatizados com `unittest`
+
+## Instalação
+
+```bash
+pip install -r requirements.txt
+```
+
+## Uso
+
+```bash
+python app.py --in raw.csv --out cleaned.parquet
+```
+
+Exemplo de entrada:
+
+```csv
+Product,Amount,Price
+A,10,2.5
+A,10,2.5
+B,invalid,4.0
+```
+
+Exemplo de saída no terminal:
+
+```text
+Rows read: 3
+Duplicates removed: 1
+Missing values: 1
+Rows exported: 2
+Saved to: cleaned.parquet
+```
+
+## Estrutura
+
+- `app.py`: interface de linha de comando
+- `cleaner.py`: funções de limpeza e transformação
+- `tests/test_cleaner.py`: testes automatizados
+- `requirements.txt`: dependências do projeto
+
+## Testes
+
+```bash
+python -m unittest discover -s tests -v
+```
