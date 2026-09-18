@@ -38,8 +38,6 @@ B,invalid,4.0
 
 Exemplo de saída no terminal:
 
-Exemplo de saída no terminal:
-
 ```text
 Rows read: 3
 Duplicates removed: 1
