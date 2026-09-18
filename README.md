@@ -38,12 +38,16 @@ B,invalid,4.0
 
 Exemplo de saída no terminal:
 
+Exemplo de saída no terminal:
+
+```text
 Rows read: 3
 Duplicates removed: 1
 Missing values: 0
 Numeric conversion errors: 1
 Rows exported: 2
 Saved to: cleaned.parquet
+```
 
 ## Estrutura
 
